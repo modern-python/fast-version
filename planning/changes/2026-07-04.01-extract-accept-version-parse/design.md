@@ -92,8 +92,7 @@ def get_accept_header_from_scope(scope: types.Scope) -> str:
     return headers.get("Accept", "").strip().lower()
 
 
-def parse_accept_version(accept_header: str, vendor_media_type: str) -> AcceptVersion:
-    ...
+def parse_accept_version(accept_header: str, vendor_media_type: str) -> AcceptVersion: ...
 ```
 
 `parse_accept_version` owns steps 3-7 of today's middleware, in order,
