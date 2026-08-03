@@ -10,12 +10,25 @@ lint:
     uv run ruff check --fix
     uv run ty check
 
+# Runs every check even when one fails, so CI reports all breaks at once.
 lint-ci:
-    uv run eof-fixer . --check
-    uv run ruff format --check
-    uv run ruff check --no-fix
-    uv run ty check
-    uv run python planning/index.py --check
+    #!/usr/bin/env bash
+    set -uo pipefail
+    failed=()
+    run() {
+        echo "+ $*"
+        "$@" || failed+=("$*")
+    }
+    run uv run eof-fixer . --check
+    run uv run ruff format --check
+    run uv run ruff check --no-fix
+    run uv run ty check
+    run uv run python planning/index.py --check
+    if [ ${#failed[@]} -gt 0 ]; then
+        printf '\nfailed checks:\n' >&2
+        printf '  %s\n' "${failed[@]}" >&2
+        exit 1
+    fi
 
 index:
     uv run python planning/index.py
