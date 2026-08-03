@@ -19,6 +19,7 @@ committed; `just install` regenerates it via `uv lock --upgrade`.
 just install    # uv lock --upgrade + uv sync --all-extras --frozen --group lint
 just lint       # eof-fixer, ruff format, ruff check --fix, ty check (mutates files)
 just lint-ci    # same checks, no mutation (--check / --no-fix) + planning index check
+                # runs all five even if one fails; failures listed at the end
 just test       # uv run --no-sync pytest; just test-ci adds coverage (--cov-fail-under=100)
 just            # default recipe: install, lint, test
 ```
