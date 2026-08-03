@@ -66,6 +66,7 @@ select = ["ALL"]
 ignore = [
     "D1", # allow missing docstrings
     "S101", # allow asserts
+    "CPY001", # copyright lives in LICENSE, not per-file headers
     "TCH", # ignore flake8-type-checking
     "FBT", # allow boolean args
     "D203", # "one-blank-line-before-class" conflicting with D211
